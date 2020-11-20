@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+}
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'org.testng', name: 'testng', version: '7.0.0'
+    implementation 'org.springframework:spring-aspects'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.3.0'
+}
+
+test {
+    useTestNG() {
+        useDefaultListeners = false
+        testName "UnitTest"
+        suiteName "UnitTestSuite"
+    }
+}
+
+bootRun {
+    main = 'example.Application'
+    classpath sourceSets.main.runtimeClasspath
+}
